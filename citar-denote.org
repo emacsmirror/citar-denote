@@ -24,11 +24,11 @@ The Citar-Denote package maintains a many-to-many relationship between your note
 
 You can create a collection of atomic notes for a single publication or write a complete literature review assorted references within one note. For example, you could write a note about each book chapter or a single literature review note for a collection of journal articles about a shared topic.
 
-The package requires a stable link between the collection of notes and the bibliography to enable references. The most common behaviour for bibliography packages in Emacs is that the filename for the relevant note includes the citation key to link it to the bibliography (e.g., =marcuse_1969_essay.org=). However, Denote follows a strict naming convention, so this approach to linking notes and literature is not feasible.
+The package requires a stable link between the collection of notes and the bibliography to enable references. The most common behaviour for bibliography packages in Emacs is that the filename for the relevant note includes the citation key to link it to the bibliography (e.g. =marcuse_1969_essay.org=). However, Denote follows a strict naming convention, so this approach to linking notes and literature is not feasible.
 
-In Citar-Denote, the citation key is part of the front matter of Denote files through the =reference= line.
+In Citar-Denote, the citation key is part of the front matter of Denote files through the =reference= keyword.
 
-Citar-Denote stores the relationship between citation keys and note files in a cache. The package regenerates this cache after you edit a bibliography file or call any Citar functions. Each bibliographic note is marked with the configurable =bib= file tag (~citar-denote-keyword~). This tag reduces the search space to generate the cache.
+Citar-Denote stores the relationship between citation keys and notes in a cache. The package regenerates this cache after you edit a bibliography file or call any Citar functions. Each bibliographic note is marked with the configurable =bib= file tag (~citar-denote-keyword~). This tag reduces the search space to generate the cache.
 
 The front matter for a bibliographic Org mode note looks something like this:
 
@@ -47,7 +47,7 @@ Open the Citar interface with ~citar-create-note~. The letters at the start of t
 
 If a note already exists, you can open it from within the Citar menu. To enable multiple notes for bibliographic items, set the ~citar-open-always-create-notes~ variable to =t=.
 
-When the literature has an electronic file registered and the ~citar-denote-open-attachment~ variable is ~non-nil~, then the first registered file will be opened in another window when creating a new note. Customise this variable to change this behaviour.
+When the literature has an electronic file registered and the ~citar-denote-open-attachment~ variable is ~non-nil~, then the first registered file opens in another window when creating a new note. Customise this variable to change this behaviour.
 
 Various configuration options are available to customise how Citar-Denote creates bibliographic notes.
 
@@ -222,7 +222,7 @@ The ~citar-denote-check-keywords~ function reviews all Denote notes and does the
 - Remove bib keyword when no reference, but ~citar-denote-keyword~ is present.
 - Add bib keyword when refenece is present, but ~citar-denote-keyword~ is missing.
 
-The ~citar-denote-nobib~ function lists all references and citations in your Denote collection that are absent in the global bibliography in the =*Messages*= buffer. Note that this list excludes local Org mode bibliographies. The output of this function is a list of citation keys used in Denote that need to be added or corrected.
+The ~citar-denote-nobib~ function lists all references and citations in your Denote collection that are absent in the global bibliography in the =*Messages*= buffer. The output of this function is a list of citation keys used in Denote that need to be added or corrected. Note that this list excludes searching in local Org mode bibliographies. 
 
 * Installation and example configuration
 #+begin_src elisp :exports none :results none :tangle test/init.el
