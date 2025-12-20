@@ -564,7 +564,6 @@ bibliographic entries cited in Denote files."
 When more than one bibliographic item is referenced, select item first."
   (interactive)
   ;; Any citation keys in the note?
-  ;; TODO: Error when used in a read-only buffer
   (if-let* ((buffer-name (buffer-file-name))
             (keys (citar-denote--retrieve-references buffer-name))
             (key (if (= (length keys) 1)
@@ -572,7 +571,7 @@ When more than one bibliographic item is referenced, select item first."
                    (citar-select-ref
                     :filter (citar-denote--has-citekeys keys)))))
       (citar-open (list key))
-    (if (denote-file-is-note-p (buffer-file-name))
+    (if (and file (denote-file-is-note-p (buffer-file-name)))
         (when (yes-or-no-p
                "Current note does contain a reference. Add one? ")
           (citar-denote-add-citekey)
