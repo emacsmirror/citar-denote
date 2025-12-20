@@ -648,7 +648,7 @@ If the only or last reference is removed, also remove `citar-denote-keyword'."
 When more than one bibliographic item is referenced, select item first."
   (interactive)
   (let ((file (buffer-file-name)))
-    (if (denote-file-is-note-p file)
+    (if (and file (denote-file-is-note-p file))
         (let* ((citekeys (citar-denote--retrieve-references file))
                (citekey (when citekeys
                           (if (= (length citekeys) 1)
@@ -661,7 +661,7 @@ When more than one bibliographic item is referenced, select item first."
            (files
             (find-file (denote-get-path-by-id
                         (denote-extract-id-from-string
-                         (denote-link--find-file-prompt files))))
+                         (denote-select-from-files-prompt files))))
             (goto-char (point-min))
             (search-forward citekey))
            ((null citekey)
