@@ -9,6 +9,10 @@ For more information read the [[file:citar-denote.org][Citar-Denote Manual]] in 
 The =init.el= file in the =test= folder provides a minimum configuration for testing the package.
 
 * Change Log
+** Version 2.5.2
+- Minor bug fixes
+- Compatability with Denote 4.1
+  
 ** Version 2.5.1
 - Replaced obsolete Denote function in ~citar-denote-find-citation~
 
