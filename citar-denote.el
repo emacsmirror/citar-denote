@@ -592,7 +592,7 @@ When more than one bibliographic item is referenced, select item first."
                    (citar-select-ref
                     :filter (citar-denote--has-citekeys keys)))))
       (citar-open-entry key)
-    (message "Buffer is not a Denote file or has no refenece(s)")))
+    (message "Buffer is not a Denote file or has no reference(s)")))
 
 ;;;###autoload
 (defun citar-denote-add-reference (&optional nocite)
@@ -739,7 +739,7 @@ Add bib keyword when reference is present, but `citar-denote-keyword' is missing
         ;; Remove bib keyword when no reference but citar-denote-keyword
         (when (and (not reference-p) bib-keyword-p)
           (citar-denote--remove-bibkey file))
-        ;; Add bib keyword when refenece but no citar-denote-keyword
+        ;; Add bib keyword when reference but no citar-denote-keyword
         (when (and reference-p (not bib-keyword-p))
           (citar-denote--add-bibkey file))))))
 
