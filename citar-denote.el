@@ -522,6 +522,21 @@ There are four special citation macros:
     (other-window 1)
     (citar-open-files citekey)))
 
+(defun citar-denote--extract-local-bibliographies ()
+  "Extract local bibliography files from Denote Org files."
+  (let ((files (denote-directory-files (concat "_" citar-denote-keyword ".*\\.org$")))
+	(bib-list '()))
+    (dolist (file files)
+      (with-temp-buffer
+        (insert-file-contents file)
+	(delay-mode-hooks (org-mode))
+        (org-element-map (org-element-parse-buffer) 'keyword
+          (lambda (k)
+            (when (string= (org-element-property :key k) "BIBLIOGRAPHY")
+              (let ((value (org-element-property :value k)))
+                (setq bib-list (append bib-list (split-string value "[ \t]*;[ \t]*" t)))))))))
+    (delete-dups bib-list)))
+
 ;; Interactive functions
 
 ;;;###autoload
