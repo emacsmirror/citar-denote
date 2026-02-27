@@ -1,11 +1,11 @@
 ;;; citar-denote.el --- Minor mode integrating Citar and Denote -*- lexical-binding: t -*-
 
-;; Copyright (C) 2022-2025 Peter Prevos
+;; Copyright (C) 2022-2026 Peter Prevos
 
 ;; Author: Peter Prevos <peter@prevos.net>
 ;; Maintainer: Peter Prevos <peter@prevos.net>
 ;; Homepage: https://github.com/pprevos/citar-denote
-;; Version: 2.5.2
+;; Version: 2.5.3
 ;; Package-Requires: ((emacs "28.1") (citar "1.4") (denote "4.1") (dash "2.19.1"))
 
 ;; This file is NOT part of GNU Emacs.
@@ -726,8 +726,8 @@ When more than one bibliographic item is referenced, select item first."
 (defun citar-denote-nobib ()
   "List citation keys referenced or cited in Denote, but not in the bibliography.
 
-Searches the global bibliograhy and local bibliographies for Org files with the
-`citar-denote-keyword'".
+Searches for dead citation keys in the global bibliograhy and local
+bibliographies for Org files with the `citar-denote-keyword'".
   (interactive)
   (let* ((local-bibs (citar-denote--extract-local-bibliographies))
 	 (global-bibs (directory-files ews-bibtex-directory t
