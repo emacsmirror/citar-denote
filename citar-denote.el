@@ -724,9 +724,16 @@ When more than one bibliographic item is referenced, select item first."
 
 ;;;###autoload
 (defun citar-denote-nobib ()
-  "List citation keys referenced or cited in Denote, but not in bibliography."
+  "List citation keys referenced or cited in Denote, but not in the bibliography.
+
+Searches the global bibliograhy and local bibliographies for Org files with the
+`citar-denote-keyword'".
   (interactive)
-  (let* ((bibliography (hash-table-keys (citar-get-entries)))
+  (let* ((local-bibs (citar-denote--extract-local-bibliographies))
+	 (global-bibs (directory-files ews-bibtex-directory t
+				      "^[A-Z|a-z|0-9].+.bib$"))
+	 (citar-bibliography (append global-bibs local-bibs))
+	 (bibliography (hash-table-keys (citar-get-entries)))
          (citations (citar-denote--extract-citations))
          (references (hash-table-keys (citar-denote--get-notes)))
 	 (union (cl-union citations references))
