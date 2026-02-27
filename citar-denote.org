@@ -216,13 +216,19 @@ The ~citar-denote-cite-nocite~ function cites any unused bibliographic items. Th
 
 Please note that these functions only recognises citations in Org files.
 
-* Quality Assurance
+* Quality assurance
+** Check bibliography keyword
 The ~citar-denote-check-keywords~ function reviews all Denote notes and does the following:
 
 - Remove bib keyword when no reference, but ~citar-denote-keyword~ is present.
 - Add bib keyword when refenece is present, but ~citar-denote-keyword~ is missing.
 
-The ~citar-denote-nobib~ function lists all references and citations in your Denote collection that are absent in the global bibliography in the =*Messages*= buffer. The output of this function is a list of citation keys used in Denote that need to be added or corrected. Note that this list excludes searching in local Org mode bibliographies. 
+** Find unmatched references and citations
+The ~citar-denote-nobib~ function lists all references and citations in your Denote collection that are absent in the global bibliography and local bibliographies in the =*Messages*= buffer.
+
+This function first searches for all local bibliographies in Org files with the `citar-denote-keyword`. A local bibliography is indicated with the ~#+bibliography:"~ keyword.
+
+The output of this function is a list of references and citation keys used in Denote that need to be added or corrected.
 
 * Installation and example configuration
 #+begin_src elisp :exports none :results none :tangle test/init.el
