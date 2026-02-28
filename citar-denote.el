@@ -6,7 +6,7 @@
 ;; Maintainer: Peter Prevos <peter@prevos.net>
 ;; Homepage: https://github.com/pprevos/citar-denote
 ;; Version: 2.5.3
-;; Package-Requires: ((emacs "28.1") (citar "1.4") (denote "4.1") (dash "2.19.1"))
+;; Package-Requires: ((emacs "29.1") (citar "1.4") (denote "4.1") (dash "2.19.1"))
 
 ;; This file is NOT part of GNU Emacs.
 
