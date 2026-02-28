@@ -260,24 +260,22 @@ citation key CITEKEY."
 
 (defun citar-denote--get-notes (&optional citekeys)
   "Generate hash table of Denote files associated with CITEKEYS.
-
-If CITEKEYS is omitted, return all Denote files tagged with
-`citar-denote-keyword'."
+If CITEKEYS is omitted, return all Denote files tagged with `citar-denote-keyword'."
   (let ((files (denote-directory-files (concat "_" citar-denote-keyword)))
-	(notes (make-hash-table :test 'equal)))
-    (prog1 notes
-      (dolist (file files)
-        (let ((keys-in-file (citar-denote--retrieve-references file)))
-          (dolist (key keys-in-file)
-            (if citekeys
-                (dolist (k citekeys)
-                  (when (string= k key)
-                    (push file (gethash key notes))))
-              (push file (gethash key notes))))))
-      (maphash
-       (lambda (key filelist)
-         (puthash key (nreverse filelist) notes))
-       notes))))
+        (notes (make-hash-table :test 'equal)))
+    (dolist (file files)
+      (let ((keys-in-file (citar-denote--retrieve-references file)))
+        (dolist (key keys-in-file)
+          (if citekeys
+              (dolist (k citekeys)
+                (when (string= k key)
+                  (push file (gethash key notes))))
+            (push file (gethash key notes))))))
+    (maphash
+     (lambda (key filelist)
+       (puthash key (nreverse filelist) notes))
+     notes)
+    notes))
 
 (defun citar-denote--retrieve-cite-files (citekey)
   "Return names of Denote files that contain CITEKEY.
