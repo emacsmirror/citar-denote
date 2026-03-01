@@ -573,22 +573,19 @@ bibliographic entries cited in Denote files."
 ;;;###autoload
 (defun citar-denote-dwim ()
   "Access attachments, notes and links of a bibliographic reference.
-
 When more than one bibliographic item is referenced, select item first."
   (interactive)
-  ;; Any citation keys in the note?
-  (if-let* ((buffer-name (buffer-file-name))
-            (keys (citar-denote--retrieve-references buffer-name))
-            (key (if (= (length keys) 1)
-                     (car keys)
-                   (citar-select-ref
-                    :filter (citar-denote--has-citekeys keys)))))
-      (citar-open (list key))
-    (if (and file (denote-file-is-note-p (buffer-file-name)))
-        (when (yes-or-no-p
-               "Current note does contain a reference. Add one? ")
-          (citar-denote-add-citekey)
-          (citar-denote-dwim))
+  (let ((file (buffer-file-name)))
+    (if (and file (denote-file-is-note-p file))
+        (if-let* ((keys (citar-denote--retrieve-references file))
+                  (key (if (= (length keys) 1)
+                           (car keys)
+                         (citar-select-ref
+                          :filter (citar-denote--has-citekeys keys)))))
+            (citar-open (list key))
+          (when (yes-or-no-p "Current note does not contain a reference. Add one? ")
+            (citar-denote-add-reference)
+            (citar-denote-dwim)))
       (message "Buffer is not a Denote file"))))
 
 ;;;###autoload
@@ -728,8 +725,8 @@ Searches for dead citation keys in the global bibliograhy and local
 bibliographies for Org files with the `citar-denote-keyword'".
   (interactive)
   (let* ((local-bibs (citar-denote--extract-local-bibliographies))
-	 (global-bibs (directory-files ews-bibtex-directory t
-				      "^[A-Z|a-z|0-9].+.bib$"))
+         (global-bibs (directory-files ews-bibtex-directory t
+				       "^[A-Z|a-z|0-9].+.bib$"))
 	 (citar-bibliography (append global-bibs local-bibs))
 	 (bibliography (hash-table-keys (citar-get-entries)))
          (citations (citar-denote--extract-citations))
