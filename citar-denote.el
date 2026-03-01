@@ -502,8 +502,8 @@ There are four special citation macros:
    (cond ((eq citar-denote-signature 'sequence)
           (if (locate-library "denote-sequence")
               (let ((parent (denote-retrieve-filename-signature
-                            (denote-sequence-file-prompt
-                             "New child of SEQUENCE"))))
+                             (denote-sequence-file-prompt
+                              "New child of SEQUENCE"))))
                 (denote-sequence-get-new 'child parent))
             (user-error "Please modify `citar-denote-signature' of install Denote-Sequence")))
          ((eq citar-denote-signature 'ask)
