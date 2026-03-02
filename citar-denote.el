@@ -722,7 +722,7 @@ When more than one bibliographic item is referenced, select item first."
   "List citation keys referenced or cited in Denote, but not in the bibliography.
 
 Searches for dead citation keys in the global bibliograhy and local
-bibliographies for Org files with the `citar-denote-keyword'".
+bibliographies for Org files with the `citar-denote-keyword'."
   (interactive)
   (let* ((local-bibs (citar-denote--extract-local-bibliographies))
          (global-bibs (directory-files ews-bibtex-directory t
